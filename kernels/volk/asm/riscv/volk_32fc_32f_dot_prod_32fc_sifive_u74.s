@@ -8,7 +8,7 @@ volk_32fc_x2_dot_prod_32fc_sifive_u74:
 	# a1: in
 	# a2: taps
 	# a3: points
-	beqz a3, .done
+	beqz a3, .empty
 
 	slli a5,a3,3
 	add  a5,a5,a1
@@ -54,7 +54,11 @@ volk_32fc_x2_dot_prod_32fc_sifive_u74:
 	fsw ft0,0(a0)
 	fsw ft1,4(a0)
 	ret
-
+.empty:
+	fmv.w.x ft0, zero
+	fsw ft8,0(a0)
+	fsw ft1,4(a0)
+	ret
 #volk_32fc_32f_dot_prod_32fc_a:
 #volk_32fc_32f_dot_prod_32fc_a:
 #volk_32fc_32f_dot_prod_32fc_a_sifive_u74:	
