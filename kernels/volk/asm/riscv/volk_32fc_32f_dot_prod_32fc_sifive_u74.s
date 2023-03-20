@@ -25,23 +25,29 @@ volk_32fc_x2_dot_prod_32fc_sifive_u74:
 	# ft0/ft1: res
 
 .loop:
-	# load in
-	flw  ft3,4(a1) # in1
+	# load input in order of when it'll be used.
 	flw  ft2,0(a1) # in0
 	flw  ft4,0(a2) # tp0
 	flw  ft5,4(a2) # tp1
+	flw  ft3,4(a1) # in1
 
-	fsub.s  ft6,ft11,ft3    # neg in1
 	fmadd.s ft0,ft2,ft4,ft0 # n0*tp0
 	addi a1,a1,8
 	fmadd.s ft1,ft2,ft5,ft1 # n0*tp1
 	addi a2,a2,8
 	fmadd.s ft7,ft3,ft4,ft7 # n1*tp0
-	fmadd.s ft8,ft6,ft5,ft8 # -in1*tp1
+	fnmsub.s ft8,ft3,ft5,ft8 # -in1*tp1
 	
 	ble a1, a5, .loop
-	beq a1,a5,.done # TODO: branch predict assumes not taken
-	# TODO: handle odd case
+
+	# TODO: branch predict assumes not taken, but almost always will.
+	# Not worth optimizing?
+	beq a1,a5,.done
+
+	# Handle odd number
+	flw  ft2,0(a1) # in0
+	flw  ft4,0(a2) # tp0
+	fmadd.s ft0,ft2,ft4,ft0
 .done:
 	fadd.s ft0,ft0,ft8
 	fadd.s ft1,ft1,ft7
