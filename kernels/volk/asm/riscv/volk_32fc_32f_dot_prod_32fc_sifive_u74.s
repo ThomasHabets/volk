@@ -5,7 +5,7 @@
 
 	#
 	# RISC-V implementation using only I and F sets.
-	# About 24% faster than GCC.
+	# About 41% faster than GCC.
 	#
 	# The generic C code is 2x unrolled, but its main flaw
 	# seems to be not properly fusing into fmadd and fnmsub.
