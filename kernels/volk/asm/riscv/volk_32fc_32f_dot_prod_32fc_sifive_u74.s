@@ -88,10 +88,6 @@ volk_32fc_x2_dot_prod_32fc_sifive_u74:
 	fsw ft0,0(a0)
 	fsw ft1,4(a0)
 	ret
-#volk_32fc_32f_dot_prod_32fc_a:
-#volk_32fc_32f_dot_prod_32fc_a:
-#volk_32fc_32f_dot_prod_32fc_a_sifive_u74:	
+#volk_32f_x2_dot_prod_16i_a:
+#volk_32f_x2_dot_prod_32f_a:
 #volk_32fc_x2_dot_prod_32fc_a:
-#volk_32f_x2_dot_prod_16i_a:	
-#volk_32f_x2_dot_prod_16i_a_sifive_u74:
-#volk_32f_x2_dot_prod_32f_a:	

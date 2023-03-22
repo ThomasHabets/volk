@@ -53,6 +53,13 @@
 #include <stdio.h>
 #include <volk/volk_common.h>
 
+#ifdef LV_HAVE_RISCV64
+extern void volk_32fc_32f_dot_prod_32fc_sifive_u74(lv_32fc_t* result,
+						   const lv_32fc_t* input,
+						   const float* taps,
+						   unsigned int num_points);
+#endif
+
 #ifdef LV_HAVE_GENERIC
 
 static inline void volk_32fc_32f_dot_prod_32fc_generic(lv_32fc_t* result,
